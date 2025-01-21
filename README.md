@@ -176,7 +176,7 @@ mode: single
 ## Other usages 
 Above i described the road which i took to be able to control the heatpump from Home Assistant and provided an example to control the temperature using the thermostat in Home Assistant dahboards. It does not stop there and i continued 
 
-+ Having Holiday mode, turning of domestic water heating and lowering room temperatures and a couple of days before ariving enabling it.
++ Having Holiday mode, turning off domestic water heating and lowering room temperatures and a couple of days before ariving enabling it again
 + Delay starting time during the night to ensure that it is running early in the morning
 + Starting heatpump a earlier to use overcapcity of solar energy and nearing the temperature where the heatpump would start otherwise.
 + Joker protection, when the temperature is set to a very high temperature it lowers to a maximum. Some friends think they are funny by putting the temperature to 30 degrees.
