@@ -152,7 +152,7 @@ actions:
     then:
       - action: pyscript.eplucon_set_value
         data:
-          uusername: username@domain.com
+          username: username@domain.com
           password: password
           command: indoor_temperature
           value: "{{ state_attr('climate.woonkamer','temperature') | float(18.0) }}"
