@@ -306,7 +306,11 @@ async def eplucon_set_value(
 # helper for return message
 #
 def return_message(status, description):
-    log.error("%s", description)
+    if status.lower() == "error": 
+        log.error("%s", description)
+
+    if status.lower() == "success":
+        log.info("%s", description)
 
     return_dict = {"status": "", "description": ""}
     return_dict["status"] = status
