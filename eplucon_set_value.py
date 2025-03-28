@@ -245,16 +245,19 @@ async def eplucon_set_value(
         if len(re.findall(r"inloggegevens is niet", html)) > 0:
             return return_message("error", "Authenticating on the portal failed")
 
-        # get the details of the form to change the control
+        # get the details of the form to change the control.
         log.info("Accessing the form: %s", url_getcontrol)
         async with session.get(url_getcontrol) as response:
             log.info("Accessing the form: Status %s", response.status)
             html = response.text()
+            # yes it is not nice how it is verified
             if response.status != 200:
                 return return_message(
                     "error",
                     "Accessing the form failed. Maybe wrong module_index is used",
                 )
+            if html == "":
+                return return_message("error", "Accessing the form failed. Maybe wrong module_index is used")
 
         input_elements = re.findall(r"<input[^>]*>", html)
         form_data = {
