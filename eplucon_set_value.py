@@ -86,57 +86,84 @@ async def eplucon_set_value(
             "type": "float",
             "min": "10.0",
             "max": "30.0",
+            "blocktype" :"module",
         },
         "boiler_temperature": {
             "code": "5700",
             "type": "integer",
             "min": "0",
             "max": "65",
+            "blocktype" :"menu",
         },
         "boiler_temperature_delta": {
             "code": "5804",
             "type": "float",
             "min": "5.00",
             "max": "65.0",
+            "blocktype" :"menu",
         },
         "warm_water_active": {
             "code": "5711",
             "type": "boolean",
             "min": "0",
             "max": "1",
+            "blocktype" :"module",
         },
-        "heatpump_active": {"code": "5715", "type": "enum", "min": "0", "max": "3"},
+        "heatpump_active": {
+            "code": "5715",
+            "type": "enum",
+            "min": "0",
+            "max": "3",
+            "blocktype" :"menu"
+        },
         "heatpump_operation_mode": {
             "code": "5712",
             "type": "enum",
             "min": "1",
             "max": "5",
+            "blocktype" :"module",
         },
-        "heating_active": {"code": "5813", "type": "boolean", "min": "0", "max": "1"},
+        "heating_active": {
+            "code": "5813",
+            "type": "boolean",
+            "min": "0",
+            "max": "1",
+            "blocktype" :"menu",
+        },
         "stop_heating_above": {
             "code": "5814",
             "type": "float",
             "min": "0.0",
             "max": "30.0",
+            "blocktype" :"menu",
         },
         "heating_curve_correction": {
             "code": "5886",
             "type": "enum",
             "min": "0",
             "max": "4",
+            "blocktype" :"menu",
         },
-        "cooling_active": {"code": "5817", "type": "boolean", "min": "0", "max": "1"},
+        "cooling_active": {
+            "code": "5817",
+            "type": "boolean",
+            "min": "0",
+            "max": "1",
+            "blocktype" :"menu",
+        },
         "stop_passive_cooling_below": {
             "code": "5901",
             "type": "float",
             "min": "0.0",
             "max": "35.0",
+            "blocktype" :"menu",
         },
         "stop_active_cooling_below": {
             "code": "5818",
             "type": "float",
             "min": "0.0",
             "max": "35.0",
+            "blocktype" :"menu",
         },
     }
 
@@ -276,19 +303,20 @@ async def eplucon_set_value(
         # based on type of control use the template json
         json = ""
         if command_item["type"] == "float":
-            json = '[{"name":"format","value":"2"},{"name":"type","value":"2"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"module"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
+            json = '[{"name":"format","value":"2"},{"name":"type","value":"2"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"placeholder_blocktype"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
         elif command_item["type"] == "integer":
-            json = '[{"name":"format","value":"1"},{"name":"type","value":"1"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"module"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
+            json = '[{"name":"format","value":"1"},{"name":"type","value":"1"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"placeholder_blocktype"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
         elif command_item["type"] == "boolean":
-            json = '[{"name":"format","value":"0"},{"name":"type","value":"10"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"menu"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
+            json = '[{"name":"format","value":"0"},{"name":"type","value":"10"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"placeholder_blocktype"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
         elif command_item["type"] == "enum":
-            json = '[{"name":"format","value":"0"},{"name":"type","value":"11"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"menu"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
+            json = '[{"name":"format","value":"0"},{"name":"type","value":"11"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"placeholder_blocktype"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
 
         #
         # set the code and value for the control in the json template string
         #
         json = json.replace("placeholder_command", command_item["code"])
         json = json.replace("placeholder_value", str(value))
+        json = json.replace('placeholder_blocktype', command_item["blocktype"])
 
         # add the json to the form so it can be submitted
         form_data["data"] = json
