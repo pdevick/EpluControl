@@ -276,7 +276,7 @@ async def eplucon_set_value(
         # based on type of control use the template json
         json = ""
         if command_item["type"] == "float":
-            json = '[{"name":"format","value":"2"},{"name":"type","value":"2"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"menu"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
+            json = '[{"name":"format","value":"2"},{"name":"type","value":"2"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"module"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
         elif command_item["type"] == "integer":
             json = '[{"name":"format","value":"1"},{"name":"type","value":"1"},{"name":"menutype","value":"MU"},{"name":"blockType","value":"module"},{"name":"tile_value","value":"placeholder_value"},{"name":"ido","value":"placeholder_command"}]'
         elif command_item["type"] == "boolean":
