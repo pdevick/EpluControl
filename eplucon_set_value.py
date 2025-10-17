@@ -82,7 +82,7 @@ async def eplucon_set_value(
     # the possible commands and its metadata
     command_type = {
         "indoor_temperature": {
-            "code": "5701",
+            "code": "5703",
             "type": "float",
             "min": "10.0",
             "max": "30.0",
